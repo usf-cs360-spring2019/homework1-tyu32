@@ -1,6 +1,6 @@
 var outputObj = {
   dates:[],
-  incidentId:[],
+  sum:[],
 }
 //Loading Data from local csv.fiel
 var LoadingData = function(){
@@ -14,18 +14,21 @@ convertRow = function(row, index){
        outputObj.dates.push(row[col]);
       // console.log(row[col]);
        break;
-      case "Incident":
+      case "Sum":
       let x = parseInt(row[col]);
-      outputObj.incidentId.push(x);
+      outputObj.sum.push(x);
     //  console.log("sss"+outputObj.incidentId);
     //  console.log(row[col]);
       break;
+      default:
+          console.log(col);
+
     }
   }
   return out;
 }
 //console.log(dates);
- d3.csv("TableauOutPut\\Larceny Theft.csv", convertRow)
+ d3.csv("TableauOutPut\\sum of data.csv", convertRow)
  .then(() => {
    DrawBarChart();
  })
@@ -35,7 +38,7 @@ var DrawBarChart = function(){
   // let day = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
   let countMin = 0;
   //Maximum number of incidents
-  let countMax = 680;
+  let countMax = 2100;
   //console.log("Count bounds: " +[countMin, countMax]);
   let svg = d3.select("body").select("section:nth-child(2)").select("div").select("svg");
   let margin = {
@@ -106,89 +109,23 @@ var DrawBarChart = function(){
 
 
   let bars = plot.selectAll("rect")
-              .data(outputObj.incidentId)
+              .data(outputObj.sum)
               .enter().append("rect")
               //.attr("class", "bar")
-              .attr("width", monthScale.bandwidth() - 30)
+              .attr("width", monthScale.bandwidth() - 80)
               .attr("x", function(d, i) {
-                return 15+ monthScale(outputObj.dates[i]);
+                return 40+ monthScale(outputObj.dates[i]);
               })
               .attr("y", function(d, i){
-                console.log(outputObj.incidentId);
-                return incidentScale(outputObj.incidentId[i]);
+                console.log(outputObj.sum);
+                return incidentScale(outputObj.sum[i]);
               })
               .attr("height", function(d, i){
-                return (plotHeight - incidentScale(outputObj.incidentId[i]));
+                return (plotHeight - incidentScale(outputObj.sum[i]));
               })
               .attr("fill", function(d, i){
-                return color(outputObj.incidentId[i]);
+                return color(outputObj.sum[i]);
               });
-
-            // bars.transition()
-            //   .attr("y", function(d) { return countScale(d.value); })
-            //   .attr("height", function(d) { return plotHeight - countScale(d.value); });
-            //
-            // bars.exit()
-            //   .each(function(d, i, nodes) {
-            //     console.log("Removing bar for:", d.key);
-            //   })
-            //   .transition()
-            //   .attr("y", function(d) { return countScale(countMin); })
-            //   .attr("height", function(d) { return plotHeight - countScale(countMin); })
-            //   .remove();
-
-
-
-
-    // plot.selectAll("rect")
-    // .data(outputObj.incidentId)
-    // .enter().append("rect")
-    //     // we will style using css
-    //     .attr("class", "bar")
-    //     // the width of our bar is determined by our band scale
-    //     .attr("width", monthScale.bandwidth())
-    //     // we must now map our letter to an x pixel position
-    //     .attr("x", function(d, i) {
-    //       return monthScale(outputObj.dates[i]);
-    //     })
-    //     // and do something similar for our y pixel position
-    //     .attr("y", function(d, i) {
-    //       return incidentScale(outputObj.incidentId[i]);
-    //     })
-    //     // here it gets weird again, how do we set the bar height?
-    //     .attr("height", function(d, i) {
-    //       console.log(outputObj.incidentId[i]);
-    //       return incidentScale(outputObj.incidentId[i]);
-    //     })
-    //     .attr("fill",function(d, i) {return color(outputObj.incidentId[i]);
-    //     });
-    //     //outputObj.days = outputObj.days.reverse();
-
-
-
-
-
-      //   for(let j = 0; j < 31; j++){
-      //   svg.append("text")
-      //   .text(outputObj.dates[j])
-      //   .style('fill', 'black')
-      //   .attr("x", 13+ monthScale(outputObj.dates[j]))
-      //   // and do something similar for our y pixel position
-      //   .attr("y", incidentScale(outputObj.incidentId[j]))
-      //   .style("font-size", "8px")
-      // }
-      // svg.append("line")
-      // .attr('x1', 12)
-      // .attr('y1', incidentScale(395.193))
-      // .attr('x2', plotWidth)
-      // .attr('y2', incidentScale(395.193))
-      // .attr("stroke-width", 1)
-      // .attr("stroke", "#A9A9A9");
-      //   // .each(function(d, i, nodes) {
-      //   //   console.log("Added bar for:", d);
-      //   // });
-
 };
 
 LoadingData();
-// DrawBarChart();

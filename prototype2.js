@@ -1,20 +1,20 @@
-var outputObj = {
+var outputObj3 = {
   category:[],
   sum:[],
 }
 //Loading Data from local csv.fiel
-var LoadingData = function(){
+var LoadingData3 = function(){
 convertRow = function(row, index){
   let out = {};
   for (let col in row){
     switch (col) {
       case "Category":
        out[col] = row[col];
-       outputObj.category.push(row[col]);
+       outputObj3.category.push(row[col]);
        break;
       case "Sum":
       out[col] = parseInt(row[col]);
-      outputObj.sum.push(row[col]);
+      outputObj3.sum.push(row[col]);
       break;
       default:
           console.log(col);
@@ -24,16 +24,16 @@ convertRow = function(row, index){
 }
  d3.csv("TableauOutPut\\top 5.csv", convertRow)
  .then(() => {
-   DrawBarChart();
+   DrawBarChart3();
  })
 }
-var DrawBarChart = function(){
+var DrawBarChart3 = function(){
   // console.log("csv obj is: " + csvObj);
   let countMin = 0;
   //Maximum number of incidents
   let countMax = 453;
   //console.log("Count bounds: " +[countMin, countMax]);
-  let svg = d3.select("body").select("section:nth-child(2)").select("div").select("svg");
+  let svg = d3.select("body").select("section:nth-child(4)").select("div").select("svg");
   let margin = {
     top:    15,
     right:  35, // leave space for y-axis
@@ -59,7 +59,7 @@ var DrawBarChart = function(){
 
 // try to create pie
 var colorScale = d3.scaleOrdinal()
-  .domain(d3.range(outputObj.length))
+  .domain(d3.range(outputObj3.length))
   .range(d3.schemeCategory10)
 
 
@@ -71,8 +71,8 @@ var outerRadius = 100;
 var arc_generator = d3.arc()
         .innerRadius(0)
         .outerRadius(100);
-var pieData = pie(outputObj.sum);
-var pieData1 = pie(outputObj.category);
+var pieData = pie(outputObj3.sum);
+var pieData1 = pie(outputObj3.category);
 
 
 var g = svg.append("g")
@@ -104,12 +104,12 @@ gs.append("text")
     .attr("text-anchor","middle")
 
     .text(function(d,i){
-      return outputObj.sum[i] + "\n"+ outputObj.category[i];
+      return outputObj3.sum[i] + "\n"+ outputObj3.category[i];
     })
     .attr('font-size', 14)
 
 
 };
 
-LoadingData();
+LoadingData3();
 // DrawBarChart();

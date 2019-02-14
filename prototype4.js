@@ -3,7 +3,7 @@ var outputObj = {
   sum:[],
 }
 //Loading Data from local csv.fiel
-var LoadingData = function(){
+var LoadingData2 = function(){
 convertRow = function(row, index){
   let out = {};
   for (col in row){
@@ -30,17 +30,17 @@ convertRow = function(row, index){
 //console.log(dates);
  d3.csv("TableauOutPut\\number of day.csv", convertRow)
  .then(() => {
-   DrawBarChart();
+   DrawBarChart2();
  })
 }
-var DrawBarChart = function(){
+var DrawBarChart2 = function(){
   // console.log("csv obj is: " + csvObj);
   // let day = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
   let countMin = 0;
   //Maximum number of incidents
   let countMax = 464;
   //console.log("Count bounds: " +[countMin, countMax]);
-  let svg = d3.select("body").select("section:nth-child(2)").select("div").select("svg");
+  let svg = d3.select("body").select("section:nth-child(3)").select("div").select("svg");
   let margin = {
     top:    15,
     right:  35, // leave space for y-axis
@@ -111,7 +111,6 @@ var DrawBarChart = function(){
   let bars = plot.selectAll("rect")
               .data(outputObj.sum)
               .enter().append("rect")
-              //.attr("class", "bar")
               .attr("width", monthScale.bandwidth()-20)
               .attr("x", function(d, i) {
                 return 10+ monthScale(outputObj.dates[i]);
@@ -128,4 +127,4 @@ var DrawBarChart = function(){
               });
 };
 
-LoadingData();
+LoadingData2();

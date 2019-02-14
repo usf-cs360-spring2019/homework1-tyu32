@@ -108,6 +108,35 @@ gs.append("text")
     })
     .attr('font-size', 14)
 
+    gs.append("text")
+  .attr("x", (plotWidth / 2) - 650)
+  .attr("y", 0 - (plotHeight / 2) + 30)
+  .attr("text-anchor", "middle")
+  .style("font-size", "16px")
+  .style("text-decoration", "underline")
+  .text("Top 5 Incidents Count Compare");
+
+  gs.append("text")
+.attr("x", (plotWidth / 2) - 850)
+.attr("y", 0 - (plotHeight / 2) + 300)
+.attr("text-anchor", "middle")
+.style("font-size", "16px")
+.text("Incident Number and Incident Category.  Color shows details about Incident Category.  Size shows sum of Incident Number.  The");
+
+gs.append("text")
+.attr("x", (plotWidth / 2) - 845)
+.attr("y", 0 - (plotHeight / 2) + 320)
+.attr("text-anchor", "middle")
+.style("font-size", "16px")
+.text("marks are labeled by Incident Number and Incident Category. The view is filtered on Incident Number, which keeps 676, 701, 727,");
+
+gs.append("text")
+.attr("x", (plotWidth / 2) - 930)
+.attr("y", 0 - (plotHeight / 2) + 340)
+.attr("text-anchor", "middle")
+.style("font-size", "16px")
+.text("948 and 4037.People can see larceny theft are over half even in top 5 total number of incidents. Roger Yu");
+
 
 };
 

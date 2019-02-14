@@ -135,6 +135,14 @@ var DrawBarChart2 = function(){
                           .attr("x", 50+monthScale(outputObj.dates[i]))
                           .attr("y", incidentScale(outputObj.sum[i])-20)
                         }
+
+                        svg.append("text")
+                      .attr("x", (plotWidth / 2))
+                      .attr("y", 0 - (plotHeight / 2) + 200)
+                      .attr("text-anchor", "middle")
+                      .style("font-size", "16px")
+                      .style("text-decoration", "underline")
+                      .text("Sum of Incident day of Week");
 };
 
 LoadingData2();

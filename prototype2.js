@@ -1,8 +1,6 @@
 var outputObj = {
-  days:[],
-  dates:[],
-  ranks:[],
-  incidents:[],
+  category:[],
+  sum:[],
 }
 //Loading Data from local csv.fiel
 var LoadingData = function(){
@@ -10,29 +8,23 @@ convertRow = function(row, index){
   let out = {};
   for (let col in row){
     switch (col) {
-      case "Day":
+      case "Category":
        out[col] = row[col];
-       outputObj.days.push(row[col]);
+       outputObj.category.push(row[col]);
        break;
-      case "Date":
+      case "Sum":
       out[col] = parseInt(row[col]);
-      outputObj.dates.push(row[col]);
+      outputObj.sum.push(row[col]);
       break;
-      case "Rank":
-      out[col] = parseInt(row[col]);
-      outputObj.ranks.push(row[col]);
-      break;
-      case "Incidents":
-      out[col] = +(row[col]);
-      outputObj.incidents.push((out[col]));
-      break;
+      default:
+          console.log(col);
     }
   }
   return out;
 }
- d3.csv("TableauOutPut\\Part1-NumberOfIncidents.csv", convertRow)
- .then((csvObj) => {
-   DrawBarChart(csvObj);
+ d3.csv("TableauOutPut\\top 5.csv", convertRow)
+ .then(() => {
+   DrawBarChart();
  })
 }
 var DrawBarChart = function(){
@@ -53,16 +45,16 @@ var DrawBarChart = function(){
     let plotWidth = bounds.width - margin.right - margin.left;
     let plotHeight = bounds.height - margin.top - margin.bottom;
     //Scalling the number of incidents as yAxis
-    let incidentScale = d3.scaleLinear()
-        .domain([countMin, countMax])
-        .range([plotHeight, 0])
-        .nice();
-
-    //Scalling number of days of a month as xAxis
-    let monthScale = d3.scaleBand()
-        .domain(outputObj.dates.reverse()) // all letters (not using the count here)
-        .rangeRound([0, plotWidth])
-        .paddingInner(0.1); // space between bars
+    // let incidentScale = d3.scaleLinear()
+    //     .domain([countMin, countMax])
+    //     .range([plotHeight, 0])
+    //     .nice();
+    //
+    // //Scalling number of days of a month as xAxis
+    // let monthScale = d3.scaleBand()
+    //     .domain(outputObj.dates.reverse()) // all letters (not using the count here)
+    //     .rangeRound([0, plotWidth])
+    //     .paddingInner(0.1); // space between bars
 
     let plot = svg.select("g#plot");
 
@@ -92,20 +84,24 @@ var outerRadius = 100;
 var arc_generator = d3.arc()
         .innerRadius(0)
         .outerRadius(100);
-var pieData = pie(outputObj.incidents);
-
-console.log(pieData);
+var pieData = pie(outputObj.sum);
+var pieData1 = pie(outputObj.category);
+var arcData = d3.pie().sort(null).value(function(d){
+  return d;
+})(outputObj.sum);
 
 var g = svg.append("g")
       .attr("transform","translate("+margin.top+","+margin.left+")");
 
 var gs = g.selectAll(".g")
-          .data(pieData)
+          //.data(pieData)
+          .data(arcData)
           .enter()
           .append("g")
-
           .attr("transform","translate("+plotWidth/2+","+plotHeight/2+")")
-
+var arc = d3.arc()
+    .outerRadius(100)
+    .innerRadius(0)
 
 gs.append("path")
         .attr("d",function(d){
@@ -117,15 +113,66 @@ gs.append("path")
 
 gs.append("text")
     .attr("transform",function(d){
-      return "translate("+arc_generator.centroid(d)+")";
+      var x = arc_generator.centroid(d)[0] * 2.5 - 10;
+      var y = arc_generator.centroid(d)[1] * 2.5;
+      return "translate("+x+","+y+")";
     })
     .attr("text-anchor","middle")
-
-    .text(function(d){
-      return d.data;
+    //.text(outputObj.sum)
+    // .text(function(d){
+    //   return (d.data);
+    // })
+    .text(function(d,i){
+      return outputObj.sum[i] + "\n"+ outputObj.category[i];
     })
+    .attr('font-size', 14)
+
 
 };
+
+
+// var text = svg.select(".labels").selectAll("text")
+//                .data(pieData);
+//
+//            // text.enter()
+//            //     .append("text")
+//            //     .attr("dy", ".35em")
+//            //     .text(function (d) {
+//            //         return d.data.label;
+//            //     });
+//
+//            function midAngle(d) {
+//                return d.startAngle + (d.endAngle - d.startAngle) / 2;
+//            }
+//
+//            text.transition().duration(1000)
+//                .attrTween("transform", function (d) {
+//                    this._current = this._current || d;
+//                    var interpolate = d3.interpolate(this._current, d);
+//                    this._current = interpolate(0);
+//                    return function (t) {
+//                        var d2 = interpolate(t);
+//                        //获取文本内容在外圆的中心位置坐标
+//                        var pos = outerArc.centroid(d2);
+//                        //然后将文本内容进行左右平移，移动到固定的radius长度，方向由饼图中心角度是否大于180度决定。
+//                        pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+//                        return "translate(" + pos + ")";
+//                    };
+//                })
+//                .styleTween("text-anchor", function (d) {
+//                    this._current = this._current || d;
+//                    var interpolate = d3.interpolate(this._current, d);
+//                    this._current = interpolate(0);
+//                    return function (t) {
+//                        var d2 = interpolate(t);
+//                        //判断文本的锚点位置
+//                        return midAngle(d2) < Math.PI ? "start" : "end";
+//                    };
+//                });
+//
+//            text.exit()
+//                .remove();
+//              };
 
 LoadingData();
 // DrawBarChart();

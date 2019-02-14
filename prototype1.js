@@ -14,7 +14,7 @@ convertRow = function(row, index){
        outputObj1.dates.push(row[col]);
       // console.log(row[col]);
        break;
-      case "Incident":
+      case "Sum":
       let x = parseInt(row[col]);
       console.log(x);
       outputObj1.incidentId.push(x);
@@ -28,7 +28,7 @@ convertRow = function(row, index){
   return out;
 }
 //console.log(dates);
- d3.csv("TableauOutPut\\Larceny Theft.csv", convertRow)
+ d3.csv("TableauOutPut\\sum of data.csv", convertRow)
  .then(() => {
    DrawBarChart1();
  })
@@ -38,7 +38,7 @@ var DrawBarChart1 = function(){
   // let day = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
   let countMin = 0;
   //Maximum number of incidents
-  let countMax = 680;
+  let countMax = 2100;
   //console.log("Count bounds: " +[countMin, countMax]);
   let svg = d3.select("body").select("section:nth-child(2)").select("div").select("svg");
   let margin = {
@@ -123,8 +123,15 @@ var DrawBarChart1 = function(){
               .attr("height", function(d, i){
                 return (plotHeight - incidentScale(outputObj1.incidentId[i]));
               })
-              .attr("fill", black);
-
+              .attr("fill", "darkblue");
+for (var i = 0; i < 7; i++) {
+  console.log(outputObj1.incidentId[i]);
+  svg.append("text")
+            .text(outputObj1.incidentId[i])
+            .style('fill', 'black')
+            .attr("x", 90+monthScale(outputObj1.dates[i]))
+            .attr("y", incidentScale(outputObj1.incidentId[i]))
+          }
 
 
 };

@@ -125,6 +125,16 @@ var DrawBarChart2 = function(){
               .attr("fill", function(d, i){
                 return color(outputObj.sum[i]);
               });
+
+              for (var i = 0; i < 31; i++) {
+                console.log(outputObj.sum[i]);
+                svg.append("text")
+                          .text(outputObj.sum[i])
+                          .style('fill', 'black')
+                          .style('writing-mode','tb')
+                          .attr("x", 50+monthScale(outputObj.dates[i]))
+                          .attr("y", incidentScale(outputObj.sum[i])-20)
+                        }
 };
 
 LoadingData2();

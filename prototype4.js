@@ -28,7 +28,7 @@ convertRow = function(row, index){
   return out;
 }
 //console.log(dates);
- d3.csv("TableauOutPut\\number of day.csv", convertRow)
+ d3.csv("output\\number of day.csv", convertRow)
  .then(() => {
    DrawBarChart2();
  })

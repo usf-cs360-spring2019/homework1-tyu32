@@ -28,7 +28,7 @@ convertRow = function(row, index){
   return out;
 }
 //console.log(dates);
- d3.csv("TableauOutPut\\sum of data.csv", convertRow)
+ d3.csv("output\\sum of data.csv", convertRow)
  .then(() => {
    DrawBarChart1();
  })
@@ -73,7 +73,7 @@ var DrawBarChart1 = function(){
 
         // shift the plot area over by our margins to leave room
         // for the x- and y-axis
-        plot.attr("transform", "translate(" + 30+ "," + margin.top + ")");
+        plot.attr("transform", "translate(" + 40+ "," + margin.top + ")");
       }
 
     let xAxis = d3.axisBottom(monthScale);

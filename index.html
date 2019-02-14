@@ -98,7 +98,7 @@
     <div class="container content">
       <!-- todo: modify as necessary (or move visualizations to separate pages) -->
       <h2>Prototype1</h2>
-      <img style="height: 500px; width: 900px;" src="TableauOutPut/1.png"/>
+      <img style="height: 500px; width: 900px;" src="output/1.png"/>
       <h2 id="vis1">Visualization 1</h2>
 
       <svg width="100%" height="400" style="background-color: whitesmoke; border: 1px solid black;">
@@ -107,19 +107,19 @@
       <h3>Interpretation</h3>
 
       <p>
-        If appropriate, provide a brief discussion of how to interpret this visualization (e.g. how the data is encoded) and how to interact with this visualization. Some of this discussion may not be necessary depending on the legends provided with the visualization.
+        The columns are incident day of week and the rows are sum of incident.
       </p>
 
       <h3>Discussion</h3>
 
       <p>
-        If appropriate, provide a brief discussion of the primary goal and findings of the visualization, any challenges encountered creating the visualization, and any other context as required by the assignment.
+        This visualization can clearly find the most dangerous day is Saturday. At first, I got all category of incident, there are too much data to see. So I try to got the number of all incidents in one day to fingure out which day is the most dangerous.
       </p>
 
       <h3>Credit</h3>
 
       <p>
-        If appropriate, provide credit for the dataset, any code used, and design inspirations here. Unsufficient discussion here is a violation of the <a href="/syllabus.html#cheating-policy">academic honesty policy</a> and may result in an F grade for the assignment or the <em>entire</em> course.
+        This is my first time to use D3. I have very hard time to fingure out how to got data from csv file. It's strange that I have to write columns name to use if-else, else atom won't got data. I got many help from example of word count. And some help from classmate.
       </p>
     </div>
   </section>
@@ -130,7 +130,7 @@
     <div class="container content">
       <!-- todo: modify as necessary (or move visualizations to separate pages) -->
       <h2>Prototype2</h2>
-      <img style="height: 500px; width: 900px;" src="TableauOutPut/2.png"/>
+      <img style="height: 500px; width: 900px;" src="output/2.png"/>
       <h2 id="vis2">Visualization 2</h2>
 
       <svg width="100%" height="400" style="background-color: whitesmoke; border: 1px solid black;">
@@ -139,19 +139,19 @@
       <h3>Interpretation</h3>
 
       <p>
-        If appropriate, provide a brief discussion of how to interpret this visualization (e.g. how the data is encoded) and how to interact with this visualization. Some of this discussion may not be necessary depending on the legends provided with the visualization.
+        The columns are incidents dates, and the rows are sum of all category incidents.
       </p>
 
       <h3>Discussion</h3>
 
       <p>
-        If appropriate, provide a brief discussion of the primary goal and findings of the visualization, any challenges encountered creating the visualization, and any other context as required by the assignment.
+        At first I want to see will it be obviously different from day by day. But the answer is no. I try to use pie graph to see the different, but since we have 31 days and most of them have about 400 incidents, it looks like the same. So I change my mind, I want to show the number of incidents. People will be superised to see we have over 400 incidents on most days.
       </p>
 
       <h3>Credit</h3>
 
       <p>
-        If appropriate, provide credit for the dataset, any code used, and design inspirations here. Unsufficient discussion here is a violation of the <a href="/syllabus.html#cheating-policy">academic honesty policy</a> and may result in an F grade for the assignment or the <em>entire</em> course.
+        Dateset is group by incident date and roll-up by incident number function is count. Most code just like vis1.
       </p>
     </div>
   </section>
@@ -162,7 +162,7 @@
     <div class="container content">
       <!-- todo: modify as necessary (or move visualizations to separate pages) -->
       <h2>Prototype3</h2>
-      <img style="height: 500px; width: 900px;" src="TableauOutPut/3.png"/>
+      <img style="height: 500px; width: 900px;" src="output/3.png"/>
       <h2 id="vis3">Visualization 3</h2>
 
       <svg width="100%" height="400" style="background-color: whitesmoke; border: 1px solid black;">
@@ -171,19 +171,20 @@
       <h3>Interpretation</h3>
 
       <p>
-        If appropriate, provide a brief discussion of how to interpret this visualization (e.g. how the data is encoded) and how to interact with this visualization. Some of this discussion may not be necessary depending on the legends provided with the visualization.
+        First I choose top 5 incidents by sum of number. Choose category as coloumns and sum of number as rows. Then click show me and choose pie graph to got this picture.
+        </picture>
       </p>
 
       <h3>Discussion</h3>
 
       <p>
-        If appropriate, provide a brief discussion of the primary goal and findings of the visualization, any challenges encountered creating the visualization, and any other context as required by the assignment.
+        In this visualization, you can see every part of top 5 incidents in the total. So you will now the Larceny theft is the biggest one. Even in the top 5, it have over half area.
       </p>
 
       <h3>Credit</h3>
 
       <p>
-        If appropriate, provide credit for the dataset, any code used, and design inspirations here. Unsufficient discussion here is a violation of the <a href="/syllabus.html#cheating-policy">academic honesty policy</a> and may result in an F grade for the assignment or the <em>entire</em> course.
+        I search on website to fingure out how to create pie graph by D3. And this is what I found:https://blog.csdn.net/qq_34414916/article/details/80036301. It's very help for.
       </p>
     </div>
   </section>
@@ -220,6 +221,7 @@
             </td>
 
             <td>
+              I create three different visualizations. The first and second are encode data used bars, and the third one used pie chart. And have three different perspectives. And use color in second and third charts. Have titles and axis labels.
               If appropriate, provide a brief justification for this level of functionality. Clearly state if this level was not implemented.
             </td>
           </tr>

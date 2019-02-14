@@ -22,7 +22,7 @@ convertRow = function(row, index){
   }
   return out;
 }
- d3.csv("TableauOutPut\\top 5.csv", convertRow)
+ d3.csv("output\\top 5.csv", convertRow)
  .then(() => {
    DrawBarChart3();
  })

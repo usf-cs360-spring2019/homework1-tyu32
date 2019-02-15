@@ -44,7 +44,7 @@ var DrawBarChart1 = function(){
   let margin = {
     top:    15,
     right:  35, // leave space for y-axis
-    bottom: 30, // leave space for x-axis
+    bottom: 50, // leave space for x-axis
     left:   10
   };
     let bounds = svg.node().getBoundingClientRect();
@@ -87,7 +87,7 @@ var DrawBarChart1 = function(){
 
     // notice it is at the top of our svg
     // we need to translate/shift it down to the bottom
-    xGroup.attr("transform", "translate(0," +plotHeight + ")")
+    xGroup.attr("transform", "translate(0," + plotHeight + ")")
 
     // do the same for our y axix
     let yGroup = plot.append("g").attr("id", "y-axis");
@@ -140,6 +140,14 @@ for (var i = 0; i < 7; i++) {
         .style("font-size", "16px")
         .style("text-decoration", "underline")
         .text("Sum of Incident day of Week");
+
+        svg.append("text")
+      .attr("x", (plotWidth / 2))
+      .attr("y", 0 - (plotHeight / 2) + 550)
+      .attr("text-anchor", "middle")
+      .style("font-size", "14px")
+      //.style("text-decoration", "underline")
+      .text("Find the incident most happened at day of week");
 
 };
 

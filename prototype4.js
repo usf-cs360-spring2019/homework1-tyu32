@@ -44,7 +44,7 @@ var DrawBarChart2 = function(){
   let margin = {
     top:    15,
     right:  35, // leave space for y-axis
-    bottom: 30, // leave space for x-axis
+    bottom: 50, // leave space for x-axis
     left:   10
   };
     let bounds = svg.node().getBoundingClientRect();
@@ -138,11 +138,18 @@ var DrawBarChart2 = function(){
 
                         svg.append("text")
                       .attr("x", (plotWidth / 2))
-                      .attr("y", 0 - (plotHeight / 2) + 200)
+                      .attr("y", 0 - (plotHeight / 2) + 186)
                       .attr("text-anchor", "middle")
                       .style("font-size", "16px")
                       .style("text-decoration", "underline")
-                      .text("Sum of Incident day of Week");
+                      .text("Total Number of Incidents in Everyday");
+
+                      svg.append("text")
+                    .attr("x", (plotWidth / 2))
+                    .attr("y", 0 - (plotHeight / 2) + 560)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
+                    .text("Audience will find most of days have around 400 incidents");
 };
 
 LoadingData2();
